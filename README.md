@@ -11,12 +11,12 @@ Static : This folder contains several folders needed to beautify webpages, inclu
 
 Templates : This folder contains HTML files for visualizing our functions on several web pages.
 
-In particular:
-Dect.html: shows basic information about the delivery center
-Delivery.htm:  visualizes the optimized routes for delivery men
-Donator.html: provides contact information for potential donors
-Hos.html: hospital users can send their requests on this page
-Index.html: homepage for general visitors, with links to other pages
+In particular: \n
+Dect.html: shows basic information about the delivery center \n
+Delivery.htm:  visualizes the optimized routes for delivery men \n
+Donator.html: provides contact information for potential donors \n
+Hos.html: hospital users can send their requests on this page \n
+Index.html: homepage for general visitors, with links to other pages 
 
 Application (Python back-end file) : This is the back-end Python code for the optimized routes algorithm implementation, data get and post from front-end submission and retrieve, data storage in csv file.   
 
