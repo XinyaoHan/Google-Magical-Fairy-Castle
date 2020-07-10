@@ -5,7 +5,34 @@ We cater to timely hospital needs by developing a hospital webpage for hospital 
 
 Beijing Dongcheng Area practical data, including first-class hospitals in degree three name list, builded delivery center list and the retrieved location data are used for implementation. 
 
-Get started: 
+Source Code:
+
+Static : This folder contains several folders needed to beautify webpages, including css and js code, pictures inserted for HTML ui improvements, 
+
+Templates : This folder contains HTML files for visualizing our functions on several web pages.
+
+In particular:
+
+Dect.html: shows basic information about the delivery center
+
+Delivery.htm:  visualizes the optimized routes for delivery men
+
+Donator.html: provides contact information for potential donors
+
+Hos.html: hospital users can send their requests on this page
+
+Index.html: homepage for general visitors, with links to other pages
+
+Application (Python back-end file) : This is the back-end Python code for the optimized routes algorithm implementation, data get and post from front-end submission and retrieve, data storage in csv file.   
+
+Distance (Excel file) : This is an Excel file containing a distance matrix between hospitals. 
+
+Hospital (csv file) : This is a csv file storing all hospital request data, which contains hospital request number, request date and hospital name, and it is constantly updated once new data is submitted. 
+
+Route (csv file) : This is a csv file storing optimized routes calculated by our algorithm. 
+
+
+To Get started: 
 
 First, install python packages needed:
 
