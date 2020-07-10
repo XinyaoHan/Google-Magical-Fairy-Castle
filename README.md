@@ -9,8 +9,11 @@ Get started:
 
 First, install python packages needed:
 pip install cplex
+
 pip install docplex
+
 pip install openpyxl
+
 pip install numpy
 
 
