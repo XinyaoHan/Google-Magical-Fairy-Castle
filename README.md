@@ -19,7 +19,9 @@ pip install numpy
 
 
 Mac User:
+
 Once you have installed the packages, go to the terminal and go to the file. Then type in the command “python application.py”. Once it starts running, open the browser and go to http://127.0.0.1:5000/ to view our platform homepage.
 
 Windows User:
+
 After package installation, double click ‘application.py’. Once it starts running, open the browser and go to http://127.0.0.1:5000/ to view our platform homepage. 
