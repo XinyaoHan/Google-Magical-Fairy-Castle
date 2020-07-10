@@ -8,10 +8,11 @@ Beijing Dongcheng Area practical data, including first-class hospitals in degree
 Get started: 
 
 First, install python packages needed:
-                  pip install cplex
-                  pip install docplex
-                  pip install openpyxl
-                  pip install numpy
+pip install cplex
+pip install docplex
+pip install openpyxl
+pip install numpy
+
 
 Mac User:
 Once you have installed the packages, go to the terminal and go to the file. Then type in the command “python application.py”. Once it starts running, open the browser and go to http://127.0.0.1:5000/ to view our platform homepage.
