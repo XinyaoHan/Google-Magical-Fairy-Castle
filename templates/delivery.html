@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <title>Directions Service</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW4jsPlNKgv6jFm3B5Edp5ywgdqLWdmc&callback=initMap"
+      defer
+    ></script>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="static/css/magnific-popup.css">
+    <link rel="stylesheet" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/themify-icons.css">
+    <link rel="stylesheet" href="static/css/nice-select.css">
+    <link rel="stylesheet" href="static/css/flaticon.css">
+    <link rel="stylesheet" href="static/css/gijgo.css">
+    <link rel="stylesheet" href="static/css/animate.css">
+    <link rel="stylesheet" href="static/css/slick.css">
+    <link rel="stylesheet" href="static/css/slicknav.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="static/css/style1.css">
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 180%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 80%;
+        margin: 0;
+        padding: 0;
+      }
+      .row {
+          margin-bottom: 50px !important;
+          margin-right: -370px !important;
+          margin-left: 70px !important;
+      }
+      
+      #directions-panel {
+        font-size: 15px;
+        margin: auto;
+        background-color: transparent;
+        padding: 20 0 0 700px;
+        overflow: visible;
+        height: 80px;
+        color: #fff;
+        width: fit-content;
+        height: fit-content;
+        /* background-color: #122145; */
+        padding: 20px;
+        border-radius: 20px;
+      }
+      #route {
+        font-size: 15px;
+        margin: auto;
+        background-color: transparent;
+        padding: 20 0 0 700px;
+        overflow: visible;
+        height: 80px;
+        color: #fff;
+        width: fit-content;
+        height: fit-content;
+        /* background-color: #122145; */
+        padding: 20px;
+        border-radius: 20px;
+      }
+    </style>
+    <script>
+      (function(exports) {
+        "use strict";
+
+        function initMap() {
+          var directionsService = new google.maps.DirectionsService();
+          var directionsDisplay = new google.maps.DirectionsRenderer();
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: {lat: 39.9042, lng: 116.4074}
+          });
+          directionsDisplay.setMap(map);
+
+         
+          var result = '{{result|safe}}';
+          
+          var result = [['东城区物资配送中心', '北京中医药大学东直门医院', '东城区物资配送中心'],['东城区物资配送中心', '北京军区总医院', '北京市首都医科大学附属北京中医医院', '北京协和医院', '东城区物资配送中心'],['东城区物资配送中心', '北京市卫生部北京医院', '北京同仁医院', '东城区物资配送中心'],['东城区物资配送中心','北京市首都医科大学附属北京口腔医院','北京市首都医科大学附属北京天坛医院','北京友谊医院','东城区物资配送中心']]
+          document.getElementById("submit").addEventListener("click",function(){
+            document.getElementById("directions-panel").style.border = "1px solid #363E52"
+              if (document.getElementById("Vheicle ID").value == "Vheicle_A"){
+                var waypts = [];
+                var len = result[0].length
+                for (var k=1; k<len-1; k++){
+                  waypts.push({location:result[0][k]});
+                }
+                calculateAndDisplayRoute(result[0][0],result[0][len-1],waypts, directionsService, directionsDisplay);
+                var route = document.getElementById("route");
+                route.innerHTML = "";
+                route.innerHTML += result[0][0]
+                for (var i = 1; i <= len-1; i++){
+                route.innerHTML += "-->";
+                route.innerHTML += result[0][i];
+               }
+              }
+              else if (document.getElementById("Vheicle ID").value == "Vheicle_B"){
+                var waypts = [];
+                var len = result[1].length
+                for (var k=1; k<len-1; k++){
+                  waypts.push({location:result[1][k]});
+                }
+                calculateAndDisplayRoute(result[1][0],result[1][len-1],waypts, directionsService, directionsDisplay);
+                var route = document.getElementById("route");
+                route.innerHTML = "";
+                route.innerHTML += result[1][0]
+                for (var i = 1; i <= len-1; i++){
+                route.innerHTML += "-->";
+                route.innerHTML += result[1][i];
+                }
+              }
+              else if (document.getElementById("Vheicle ID").value == "Vheicle_C"){
+                var waypts = [];
+                var len = result[2].length
+                for (var k=1; k<len-1; k++){
+                  waypts.push({location:result[2][k]});
+                }
+                calculateAndDisplayRoute(result[2][0],result[2][len-1],waypts, directionsService, directionsDisplay);
+                var route = document.getElementById("route");
+                route.innerHTML = "";
+                route.innerHTML += result[2][0]
+                for (var i = 1; i < result[2].length; i++){
+                route.innerHTML += "-->";
+                route.innerHTML += result[2][i];
+                } 
+              }
+              else{
+                var waypts = [];
+                var len = result[3].length
+                for (var k=1; k<len-1; k++){
+                  waypts.push({location:result[3][k]});
+                }
+                calculateAndDisplayRoute(result[3][0],result[3][len-1],waypts, directionsService, directionsDisplay);
+                var route = document.getElementById("route");
+                route.innerHTML = "";
+                route.innerHTML += result[3][0]
+                for (var i = 1; i < result[3].length; i++){
+                route.innerHTML += "-->";
+                route.innerHTML += result[3][i];
+                }
+              } 
+
+              
+              
+          
+              });
+            }
+        function calculateAndDisplayRoute(start, end, waypts ,directionsService, directionsDisplay) {
+          directionsService.route({
+            origin: start,
+            destination: end,
+            travelMode: 'DRIVING',
+            waypoints: waypts
+          },
+          function(response, status) {
+            if (status === 'OK') {
+              directionsDisplay.setDirections(response);
+              var route = response.routes[0];
+              // display total distance information.
+              var summaryPanel = document.getElementById("directions-panel");
+              summaryPanel.innerHTML = ""; // For each route, display summary information.
+              for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                summaryPanel.innerHTML +="<b>第" + routeSegment + "段路程: "+"</b><br>";
+                summaryPanel.innerHTML +=
+                route.legs[i].start_address + " 到 ";
+                summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+                summaryPanel.innerHTML += "路程距离: ";
+                summaryPanel.innerHTML +=
+                route.legs[i].distance.text + "<br>";
+                summaryPanel.innerHTML += "预计用时： ";
+                summaryPanel.innerHTML +=
+                route.legs[i].duration.text + "<br>";
+                
+                }
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
+          }
+          );
+        }
+            exports.calculateAndDisplayRoute = calculateAndDisplayRoute;
+            exports.initMap = initMap;
+      })((this.window = this.window || {}));
+    </script>
+  </head>
+
+<body>
+  <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="#">
+                                        <img src="#" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/"> <i> Home</i> </a></li>
+                                            <li><a href="hos"> <i> Hospital User</i> </a></li>
+                                            <li><a href="delivery"> <i> Deliveryman</i> </a></li>
+                                            <li><a href="dect"> <i> Delivery center</i> </a></li>
+                                            <li><a href="donator"> <i> Donator</i> </a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                                <div class="social_wrap d-flex align-items-center justify-content-end">
+                                    <div class="number">
+                                        <p> <i class="fa fa-phone"></i> 10(256)-928 256</p>
+                                    </div>
+                                    <div class="social_links d-none d-xl-block">
+                                        <ul>
+                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seach_icon">
+                                <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <div id="map"></div>
+    <div class="where_togo_area">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-lg-3">
+                  <div class="form_area">
+                      <h3>请选择您的车辆编号</h3>
+                  </div>
+              </div>
+              <div class="col-lg-5">
+                  <div class="search_wrap">
+                      <form class="search_form" action="#">
+                          <div class="input_field">
+                              <select id="Vheicle ID">
+                                  <option value="Vheicle_A">车辆A</option>
+                                  <option value="Vheicle_B">车辆B</option>
+                                  <option value="Vheicle_C">车辆C</option>
+                                  <option value="Vheicle_D">车辆D</option>
+                              </select>
+                          </div>
+                          <div class="search_btn">
+                              <button class="boxed-btn4 " type="submit" id="submit">Enter</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id = "route"></div>
+      <div id="directions-panel"></div>
+   
+
+  </div>
+
+<script src="static/js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="static/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="static/js/popper.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/owl.carousel.min.js"></script>
+<script src="static/js/isotope.pkgd.min.js"></script>
+<script src="static/js/ajax-form.js"></script>
+<script src="static/js/waypoints.min.js"></script>
+<script src="static/js/jquery.counterup.min.js"></script>
+<script src="static/js/imagesloaded.pkgd.min.js"></script>
+<script src="static/js/scrollIt.js"></script>
+<script src="static/js/jquery.scrollUp.min.js"></script>
+<script src="static/js/wow.min.js"></script>
+<script src="static/js/nice-select.min.js"></script>
+<script src="static/js/jquery.slicknav.min.js"></script>
+<script src="static/js/jquery.magnific-popup.min.js"></script>
+<script src="static/js/plugins.js"></script>
+<script src="static/js/gijgo.min.js"></script>
+<script src="static/js/slick.min.js"></script>
+<!--contact js-->
+<script src="static/js/contact.js"></script>
+<script src="static/js/jquery.ajaxchimp.min.js"></script>
+<script src="static/js/jquery.form.js"></script>
+<script src="static/js/jquery.validate.min.js"></script>
+<script src="static/js/mail-script.js"></script>
+<script src="static/js/main.js"></script>
+  </body>
+</html>
